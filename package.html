@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tour Packages</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    .page-header {
+      height: 300px;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url("https://media.istockphoto.com/id/1403500817/photo/the-craggies-in-the-blue-ridge-mountains.jpg?s=612x612&w=0&k=20&c=N-pGA8OClRVDzRfj_9AqANnOaDS3devZWwrQNwZuDSk=") no-repeat center center;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 0 15px;
+    }
+
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    .page-header p {
+      font-size: 1rem;
+    }
+
+    .packages {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: 3px;
+      background-color: #ff7f50;
+      bottom: -10px;
+      left: 25%;
+    }
+
+    .package-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .package-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 350px;
+      transition: transform 0.3s;
+    }
+
+    .package-card:hover {
+      border-width: 3px;
+      transform: translateY(-10px);
+    }
+
+    .navbar {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      url('https://images.unsplash.com/photo-1524492412937-b33874b7bdd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position:fixed;
+  }
+
+  .logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .logo span {
+    color:lightgreen;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+  }
+
+  .nav-links li {
+    margin-left: 20px;
+  }
+
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 5px;
+  }
+
+  .nav-links a:hover {
+    background-color: lightgray;
+  }
+  
+
+    .package-img {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .package-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .package-card:hover .package-img img {
+      transform: scale(1.1);
+    }
+
+    .package-content {
+      padding: 20px;
+    }
+
+    .package-content h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .package-content p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .package-details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+
+    .package-details span {
+      flex: 1 1 30%;
+      margin: 5px 0;
+    }
+
+    .price {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: blue;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color:lightskyblue;
+      color: white;
+      padding: 10px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: 0.3s;
+      border: 2px solid black;
+    }
+
+    .btn:hover {
+      background-color: white;
+      color: black;
+      border-color: black;
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: #ff7f50;
+    }
+
+    .btn-outline:hover {
+      background-color: #ff7f50;
+      color: white;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      padding: 30px 15px 15px;
+      text-align: center;
+    }
+
+    .copyright {
+      border-top: 1px solid #444;
+      padding-top: 10px;
+      font-size: 0.8rem;
+      color: #bbb;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.75rem;
+      }
+
+      .package-details {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .package-details span {
+        flex: 1 1 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page-header {
+        height: auto;
+        padding: 40px 15px;
+      }
+
+      .page-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .package-content {
+        padding: 15px;
+      }
+
+      .btn {
+        padding: 8px 20px;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo"><span>Explore India</span></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="package.html">Packages</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+  </nav>
+
+  <section class="page-header">
+    <h1>Our Tour Packages</h1>
+    <p>Discover the perfect Indian adventure tailored just for you</p>
+  </section>
+
+  <section class="packages">
+    <h2 class="section-title">Explore Our Packages</h2>
+
+    <div class="package-container">
+      <!-- Individual Packages go here (you can keep your same structure from the original post) -->
+      <!-- Paste your package-card elements here, unchanged -->
+    </div>
+  </section>
+  <section class="packages">
+    <div class="package-container">
+      <div class="package-card">
+        <div class="package-img">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM1uQWhojLeiNTEn6bEF4eMRxfI__gwCtbnw&s">
+        </div>
+        <div class="package-content">
+          <h3>Himalaya Hills</h3>
+          <p>Explore Kashmir,Himalaya,Manali</p>
+          <p>Date:6,Jan.</p>
+          <div class="price">6,000 INR.</div>
+          <a href="book.html" class="btn">Book Now</a>
+        </div>
+      </div>
+
+      <div class="package-card">
+        <div class="package-img">
+          <img src="https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2021/07/dwarkadhish-temple-1597149611-lb-1626228217.jpg">
+        </div>
+        <div class="package-content">
+          <h3>Dwarka Visits</h3>
+          <p>Visit the famous temple of world Shree Dwarkadhish Temple.</p>
+          <p>Nageshwar,Shivrajpur,GopiTalav</p>
+          <p>Date:23,Feb.</p>
+          <div class="price">8,000 INR.</div>
+          <a href="book.html" class="btn">Book Now</a>
+        </div>
+      </div>
+
+      <div class="package-card">
+        <div class="package-img">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Somanath_Temple.jpg/500px-Somanath_Temple.jpg">
+        </div>
+        <div class="package-content">
+          <h3>Somnath Temple</h3>
+          <p>Explore the Temple.</p>
+          <p>Somnath Temple,Prabhas-Patan,Sasan.</p>
+          <p>Every Amavas.</p>
+          <div class="price">12,000 INR.</div>
+          <a href="book.html" class="btn">Book Now</a>
+        </div>
+      </div>
+
+      <div class="package-card">
+        <div class="package-img">
+          <img src="https://go.thrillblazers.in/wp-content/uploads/2020/07/Girnar-Hills-870x555.jpg">
+        </div>
+        <div class="package-content">
+          <h3>Girnar Hills</h3>
+          <p>Explore the Mountain.</p>
+          <p>Girnar Hills.</p>
+          <p>Every Friday.</p>
+          <div class="price">3,000 INR.</div>
+          <a href="book.html" class="btn">Book Now</a>
+        </div>
+      </div>
+
+      <div class="package-card">
+        <div class="package-img">
+          <img src="https://t4.ftcdn.net/jpg/05/58/64/17/360_F_558641735_r64vTIWibgjdz1CGMWssVo11jU8DaLvI.jpg">
+        </div>
+        <div class="package-content">
+          <h3>South Indian Temple</h3>
+          <p>Explore the Architecture of ancient temple.</p>
+          <p>Date:20,March.</p>
+          <div class="price">22,000 INR.</div>
+          <a href="book.html" class="btn">Book Now</a>
+        </div>
+      </div>
+      
+
+      <div class="package-card">
+        <div class="package-img">
+          <img src="https://t4.ftcdn.net/jpg/01/57/19/21/360_F_157192126_MBTAxonqou2APfbVNVsjvvgzOkfIedmq.jpg">
+        </div>
+        <div class="package-content">
+          <h3>Goa Beach Vacation</h3>
+          <p>Explore the Sea.</p>
+          <p>South Goa, Noorth Goa.</p>
+          <p>In,Summer.</p>
+          <div class="price">14,000 INR.</div>
+          <a href="book.html" class="btn">Book Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="copyright">
+      &copy; 2025 ExploreIndia. All Rights Reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
